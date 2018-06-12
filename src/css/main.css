@@ -1,7 +1,29 @@
-html, body, #map {
+html, body, #map, #slides, .slide {
 	width: 100%;
 	height: 100%;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
+}
+
+#map {
+	transition: 1s filter linear;
+	filter: saturate(0%);
+}
+
+#slides, .slide {
+	position: absolute;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+}
+
+.slide {
+	opacity: 0;
+	background: rgba(255, 255, 255, 0.7);
+	transition: opacity 1s linear;
+}
+
+.slide.current {
+	opacity: 1;
 }
