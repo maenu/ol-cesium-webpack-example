@@ -119,6 +119,7 @@ let scene = ol3d.getCesiumScene()
 scene.skyAtmosphere = undefined
 scene.backgroundColor = Cesium.Color.WHITE
 scene.terrainProvider = Cesium.createWorldTerrain()
+scene.globe.tileCacheSize = 100000
 
 let i = -1
 let STATES = [{
@@ -172,7 +173,11 @@ let goTo = (j) => {
 		e.classList.remove('current')
 	})
 	if (state.destination) {
-		scene.camera.flyTo(state.destination)
+		scene.camera.flyTo(Object.assign({}, state.destination, {
+			duration: 10,
+			pitchAdjustHeight: 0,
+			easingFunction: Cesium.EasingFunction.SINUSOIDAL_IN_OUT
+		}))
 	} else {
 		document.querySelector(`#slides #slide-${state.slide}`).classList.add('current')
 	}
