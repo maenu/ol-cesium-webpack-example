@@ -8,7 +8,6 @@ html, body, #map, #slides, .slide {
 
 #map {
 	transition: 1s filter linear;
-	filter: saturate(0%);
 }
 
 #slides, .slide {

@@ -3,75 +3,137 @@ require('./css/main.css')
 
 import Cesium from 'cesium/Cesium'
 window.Cesium = Cesium
+
 import OLCesium from 'olcs/OLCesium'
-import core from 'olcs/core'
-import Map from 'ol/Map.js'
-import View from 'ol/View.js'
-import * as proj from 'ol/proj.js'
-import TileLayer from 'ol/layer/Tile.js'
-import Stamen from 'ol/source/Stamen.js'
+
+import olMap from 'ol/Map.js'
+import olView from 'ol/View.js'
+import * as olProj from 'ol/proj.js'
+import olLayerTile from 'ol/layer/Tile.js'
+import olSourceStamen from 'ol/source/Stamen.js'
+import olStyleText from 'ol/style/Text.js'
+import olStyleStyle from 'ol/style/Style.js'
+import olGeomPoint from 'ol/geom/Point.js'
+import olFeature from 'ol/Feature.js'
+import olStyleFill from 'ol/style/Fill.js'
+import olGeomCircle from 'ol/geom/Circle.js'
+import olStyleCircle from 'ol/style/Circle.js'
+import olSourceVector from 'ol/source/Vector.js'
+import olLayerVector from 'ol/layer/Vector.js'
+
+let createFeature = (text, radius, olCoordinates) => {
+	olCoordinates = olProj.fromLonLat(olCoordinates)
+	const feature = new olFeature({
+		geometry: new olGeomPoint(olCoordinates)
+	})
+	const style = [new olStyleStyle({
+		text: new olStyleText({
+			text: text,
+			font: '5em sans-serif',
+			textAlign: 'center',
+			textBaseline: 'middle',
+			fill: new olStyleFill({
+				color: 'rgba(0, 0, 0, 0.9)'
+			})
+		})
+	}), new olStyleStyle({
+		geometry: new olGeomCircle(olCoordinates, radius),
+		fill: new olStyleFill({
+			color: 'rgba(255, 0, 0, 0.3)'
+		})
+	})]
+	feature.setStyle(style)
+	return feature
+}
 
 const SOLOTHURN = {
-	destination: new Cesium.Cartesian3(4305877.4497946715, 570878.8924526325, 4657357.815395062),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.8110022745845021, -0.5697544738504208, 0.13287268397301974),
-		up: new Cesium.Cartesian3(0.3108562712171607, -0.22725293708160801, 0.9228892031185248)
+	feature: createFeature('Solothurn', 1e2, [7.5322909999999865, 47.2088348]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(4305877.4497946715, 570878.8924526325, 4657357.815395062),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.8110022745845021, -0.5697544738504208, 0.13287268397301974),
+			up: new Cesium.Cartesian3(0.3108562712171607, -0.22725293708160801, 0.9228892031185248)
+		}
 	}
 }
 const GROSSHOCHSTETTEN = {
-	destination: new Cesium.Cartesian3(4328984.384029111, 579749.2356020015, 4634880.664951307),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.9774952590123558, 0.18640254281393343, 0.09877808785792136),
-		up: new Cesium.Cartesian3(0.14320995880230197, 0.24252835807714945, 0.9595159734096379)
+	feature: createFeature('Grosshöchstetten', 1e2, [7.638021999999978, 46.90670249999999]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(4328984.384029111, 579749.2356020015, 4634880.664951307),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.9774952590123558, 0.18640254281393343, 0.09877808785792136),
+			up: new Cesium.Cartesian3(0.14320995880230197, 0.24252835807714945, 0.9595159734096379)
+		}
 	}
 }
 const BURGDORF = {
-	destination: new Cesium.Cartesian3(4316097.009629531, 576891.3198516676, 4646632.946977612),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.8474541670733944, 0.5297164433799465, -0.034956034140610465),
-		up: new Cesium.Cartesian3(0.2518984416838627, 0.45920836895404915, 0.85186551107543)
+	feature: createFeature('Burgdorf', 1e2, [7.627224299999966, 47.0559357]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(4316541.439687318, 578160.3112848722, 4646083.445367282),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.9520949061743215, -0.24715517335956902, 0.18008223099048767),
+			up: new Cesium.Cartesian3(0.19801501115421027, -0.0495155666891596, 0.9789475287333073)
+		}
 	}
 }
 const BERN = {
-	destination: new Cesium.Cartesian3(4327580.426142101, 566638.5222751156, 4638518.890336925),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.8597510734520366, -0.46159402812260547, -0.21853842888521488),
-		up: new Cesium.Cartesian3(0.008190394394159363, -0.440315068780615, 0.8978059688175338)
-	}
-}
-const NEUCHATEL = {
-	destination: new Cesium.Cartesian3(4328024.324538709, 526244.239571324, 4641193.704714465),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.9709539801144114, -0.07014251177826682, 0.22875400879857616),
-		up: new Cesium.Cartesian3(0.22520786793685732, 0.05497324183448217, 0.972758633424316)
+	feature: createFeature('Bern', 1e2, [7.447446799999966, 46.9479739]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(4325421.789874649, 566969.4302730401, 4640793.334586862),
+		orientation: {
+			direction: new Cesium.Cartesian3(0.028975518746800828, -0.48008231016537134, -0.8767447717435413),
+			up: new Cesium.Cartesian3(0.9315239007556051, -0.3051391116987475, 0.1978720415641407)
+		}
 	}
 }
 const FRIBOURG = {
-	destination: new Cesium.Cartesian3(4341279.369223136, 545940.4146227916, 4627264.74589159),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.6831916828692814, -0.7301082853002537, -0.01382086083290671),
-		up: new Cesium.Cartesian3(0.37247457166022513, -0.36469385523073045, 0.8533821450109434)
+	feature: createFeature('Fribourg', 1e2, [7.161971900000026, 46.8064773]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(4340140.411975827, 547699.0980531395, 4629590.2637987565),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.1680504943375809, -0.6983474641657448, -0.695751285048162),
+			up: new Cesium.Cartesian3(0.7736762482737365, -0.5308135858855988, 0.3459219563663861)
+		}
+	}
+}
+const NEUCHATEL = {
+	feature: createFeature('Neuchâtel', 1e2, [6.9292732000000115, 46.9899874]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(4330994.706214172, 525231.4612516261, 4640154.020972635),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.9678480858880787, 0.15369566623750985, 0.19911736444265793),
+			up: new Cesium.Cartesian3(0.22602938980364923, 0.18408182029484868, 0.9565691811792418)
+		}
 	}
 }
 const MADRID = {
-	destination: new Cesium.Cartesian3(4858238.188838587, -313203.5057947239, 4112911.596772732),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.972453506278253, -0.20513798293174845, 0.11069140023427981),
-		up: new Cesium.Cartesian3(0.16060884015583843, -0.24551335640729005, 0.9559958118576793)
+	feature: createFeature('Madrid', 1e5, [-3.7037901999999576, 40.4167754]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(5196833.095374121, 526435.7991801985, 5024241.107712613),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.3992619532756594, -0.5328963807288749, -0.7460638981163551),
+			up: new Cesium.Cartesian3(0.705236867660123, -0.6984835376542852, 0.12149777001613352)
+		}
 	}
 }
 const MARIBOR = {
-	destination: new Cesium.Cartesian3(4233170.001101817, 1182466.7867577937, 4608877.722935428),
-	orientation: {
-		direction: new Cesium.Cartesian3(-0.7772288292884106, 0.517594133777199, -0.35778717081862765),
-		up: new Cesium.Cartesian3(0.18618502084857963, 0.7323409469457338, 0.6549899811739414)
+	feature: createFeature('Maribor', 1e5, [15.645881199999963, 46.5546503]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(5501088.582945007, 1639130.765327577, 4819992.906463367),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.9288555881848899, -0.3057186266520443, -0.20919707841098123),
+			up: new Cesium.Cartesian3(-0.18543448950142305, -0.10515129288720106, 0.9770144603369476)
+		}
 	}
 }
 const SHANGHAI = {
-	destination: new Cesium.Cartesian3(-2851744.926157732, 4659842.972179966, 3284380.871618134),
-	orientation: {
-		direction: new Cesium.Cartesian3(0.015062528898830252, -0.7966826938049401, 0.6042100674557451),
-		up: new Cesium.Cartesian3(-0.4613468130990927, 0.5305741134827735, 0.7110908719321883)
+	feature: createFeature('Shanghai', 2e5, [121.47370209999997, 31.2303904]),
+	flyTo: {
+		destination: new Cesium.Cartesian3(-3101213.8626872385, 7437135.4453494465, 6079473.611640211),
+		orientation: {
+			direction: new Cesium.Cartesian3(0.06759159488488803, -0.7518878171852501, -0.6558171137362284),
+			up: new Cesium.Cartesian3(-0.9904882502577982, 0.028392538023595287, -0.13463613885515363)
+		}
 	}
 }
 
@@ -79,32 +141,34 @@ const DESTINATIONS = [
 	GROSSHOCHSTETTEN,
 	BURGDORF,
 	BERN,
-	NEUCHATEL,
 	FRIBOURG,
+	NEUCHATEL,
 	MADRID,
 	MARIBOR,
 	SHANGHAI,
 	SOLOTHURN
 ]
 
-let view = new View({
-	center: proj.fromLonLat([0, 0]),
-	zoom: 1
+const labelSource = new olSourceVector()
+const labelLayer = new olLayerVector({
+	source: labelSource,
+	altitudeMode: 'clampToGround'
 })
-let map = new Map({
+
+let view = new olView({
+	center: olProj.fromLonLat([0, 0]),
+	zoom: 3
+})
+let map = new olMap({
 	target: 'map',
 	projection: 'EPSG:3857',
 	layers: [
-		new TileLayer({
-			source: new Stamen({
+		new olLayerTile({
+			source: new olSourceStamen({
 				layer: 'watercolor'
 			})
 		}),
-		new TileLayer({
-			source: new Stamen({
-				layer: 'terrain-labels'
-			})
-		})
+		labelLayer
 	],
 	view: view
 })
@@ -123,41 +187,74 @@ scene.globe.tileCacheSize = 100000
 
 let i = -1
 let STATES = [{
-	destination: GROSSHOCHSTETTEN
+	flyTo: GROSSHOCHSTETTEN.flyTo,
+	features: [GROSSHOCHSTETTEN.feature],
+	filter: 'sepia(80%) contrast(110%) saturate(50%) blur(2px)'
 }, {
 	slide: 0
 }, {
-	destination: BURGDORF
+	flyTo: BURGDORF.flyTo,
+	features: [BURGDORF.feature],
+	filter: 'sepia(50%) contrast(103%) saturate(70%) blur(1.4px)'
 }, {
 	slide: 1
 }, {
-	destination: BERN
+	flyTo: BERN.flyTo,
+	features: [BERN.feature],
+	filter: 'sepia(20%) contrast(101%) saturate(90%) blur(1.1px)'
 }, {
 	slide: 2
 }, {
-	destination: NEUCHATEL
+	flyTo: {
+		destination: new Cesium.Cartesian3(4373502.432575947, 576401.6483197737, 4634934.781734697),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.8538266450277979, -0.5202633899293546, -0.017494723198469665),
+			up: new Cesium.Cartesian3(0.17412462513507732, -0.31711242296526815, 0.9322662313538261)
+		}
+	},
+	features: [
+		createFeature('Bern', 3e3, [7.447446799999966, 46.9479739]),
+		createFeature('Fribourg', 3e3, [7.161971900000026, 46.8064773]),
+		createFeature('Neuchâtel', 3e3, [6.9292732000000115, 46.9899874])
+	],
+	filter: 'sepia(10%) saturate(95%)'
 }, {
 	slide: 3
 }, {
-	destination: FRIBOURG
+	flyTo: {
+		destination: new Cesium.Cartesian3(6673109.653503922, 777835.7824100128, 5352723.393619237),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.8949117153238542, -0.14385773934470406, -0.4224191906231869),
+			up: new Cesium.Cartesian3(-0.3914523263324362, -0.20138726279775276, 0.8978909992820692)
+		}
+	},
+	features: [
+		MARIBOR.feature,
+		MADRID.feature
+	],
+	filter: ''
+}, {
+	flyTo: {
+		destination: new Cesium.Cartesian3(4269481.213477779, 8584386.51263794, 12575324.66690254),
+		orientation: {
+			direction: new Cesium.Cartesian3(-0.2812709054399874, -0.5621696730295537, -0.7777222746448852),
+			up: new Cesium.Cartesian3(-0.3912946021060922, -0.6728185372261446, 0.6278564727129173)
+		}
+	},
+	features: [
+		MARIBOR.feature,
+		MADRID.feature,
+		SHANGHAI.feature
+	],
+	filter: ''
 }, {
 	slide: 4
 }, {
-	destination: MADRID
+	flyTo: SOLOTHURN.flyTo,
+	features: [SOLOTHURN.feature],
+	filter: ''
 }, {
 	slide: 5
-}, {
-	destination: MARIBOR
-}, {
-	slide: 6
-}, {
-	destination: SHANGHAI
-}, {
-	slide: 7
-}, {
-	destination: SOLOTHURN
-}, {
-	slide: 8
 }]
 let next = () => {
 	goTo((i + 1 + STATES.length) % STATES.length)
@@ -168,27 +265,38 @@ let previous = () => {
 let goTo = (j) => {
 	i = j
 	let state = STATES[i]
-	document.querySelector('#map').style.filter = `saturate(${100 * i / (STATES.length - 1)}%)`
 	document.querySelectorAll('#slides .current').forEach((e) => {
 		e.classList.remove('current')
 	})
-	if (state.destination) {
-		scene.camera.flyTo(Object.assign({}, state.destination, {
-			duration: 10,
-			pitchAdjustHeight: 0,
-			easingFunction: Cesium.EasingFunction.SINUSOIDAL_IN_OUT
-		}))
-	} else {
+	labelSource.clear()
+	if (state.slide != undefined) {
 		document.querySelector(`#slides #slide-${state.slide}`).classList.add('current')
+	}
+	if (state.flyTo != undefined) {
+		scene.camera.lookAt
+		scene.camera.flyTo(state.flyTo)
+	}
+	if (state.features != undefined) {
+		labelSource.addFeatures(state.features)
+	}
+	if (state.filter != undefined) {
+		document.querySelector('#map').style.filter = state.filter
 	}
 }
 
+labelSource.addFeatures([SOLOTHURN.feature])
+scene.camera.flyTo(Object.assign({}, SOLOTHURN.flyTo, {
+	duration: 10,
+	pitchAdjustHeight: 0,
+	easingFunction: Cesium.EasingFunction.SINUSOIDAL_IN_OUT
+}))
+
 window.addEventListener('keydown', (event) => {
-	if (event.key == 'ArrowRight' || event.key == 'PageDown'){
+	if (event.key == 'ArrowRight' || event.key == 'PageDown') {
 		next()
-	} else if (event.key == 'ArrowLeft' || event.key == 'PageUp'){
+	} else if (event.key == 'ArrowLeft' || event.key == 'PageUp') {
 		previous()
-	} else if (event.key == 'ArrowDown'){
+	} else if (event.key == 'ArrowDown') {
 		let position = scene.camera.position
 		let direction = scene.camera.direction
 		let up = scene.camera.up
