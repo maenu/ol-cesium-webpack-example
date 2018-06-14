@@ -42,7 +42,7 @@ module.exports = [{
 			test: /\.css$/,
 			use: ['style-loader', 'css-loader']
 		}, {
-			test: /\.(png|gif|jpg|jpeg|svg|xml|json)$/,
+			test: /\.(png|gif|jpg|jpeg|svg|xml|json|pdf|swf)$/,
 			use: ['url-loader']
 		}]
 	},
@@ -50,6 +50,10 @@ module.exports = [{
 		new HtmlWebpackPlugin({
 			template: 'src/index.html'
 		}),
+		new CopywebpackPlugin([{
+			from: path.join(__dirname, 'src/assets'),
+			to: 'assets'
+		}]),
 		// Copy Cesium Assets, Widgets, and Workers to a static directory
 		new CopywebpackPlugin([{
 			from: path.join(cesiumSource, cesiumWorkers),

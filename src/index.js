@@ -292,11 +292,11 @@ scene.camera.flyTo(Object.assign({}, SOLOTHURN.flyTo, {
 }))
 
 window.addEventListener('keydown', (event) => {
-	if (event.key == 'ArrowRight' || event.key == 'PageDown') {
+	if (event.key == 'PageDown') {
 		next()
-	} else if (event.key == 'ArrowLeft' || event.key == 'PageUp') {
+	} else if (event.key == 'PageUp') {
 		previous()
-	} else if (event.key == 'ArrowDown') {
+	} else if (event.key == 'Home') {
 		let position = scene.camera.position
 		let direction = scene.camera.direction
 		let up = scene.camera.up
