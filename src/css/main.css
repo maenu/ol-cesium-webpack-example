@@ -16,6 +16,22 @@ html, body, #map, #slides, .slide {
 	left: 0;
 }
 
+audio {
+	display: none;
+}
+
+img.cover {
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+img.contain {
+	object-fit: contain;
+	width: 100%;
+	height: 100%;
+}
+
 .slide {
 	display: none;
 	opacity: 0;
@@ -26,4 +42,11 @@ html, body, #map, #slides, .slide {
 .slide.current {
 	display: block;
 	opacity: 1;
+}
+
+#slide-1 * {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
