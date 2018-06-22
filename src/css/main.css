@@ -6,6 +6,16 @@ html, body, #map, #slides, .slide {
 	overflow: hidden;
 }
 
+h1 {
+	font-size: 20vh;
+}
+h2 {
+	font-size: 12vh;
+}
+h3 {
+	font-size: 8vh;
+}
+
 #map {
 	transition: 1s filter linear;
 }
@@ -35,13 +45,21 @@ img.contain {
 .slide {
 	display: none;
 	opacity: 0;
-	background: rgba(255, 255, 255, 0.7);
+	background: rgba(255, 255, 255, 0.33);
 	transition: opacity 1s linear;
+	font-family: sans-serif;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
 }
 
 .slide.current {
-	display: block;
+	display: flex;
 	opacity: 1;
+}
+
+#slide-1 {
+	background: rgba(255, 255, 255, 1);
 }
 
 #slide-1 * {
@@ -49,4 +67,37 @@ img.contain {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+#slide-1 #mac-se30 {
+	left: 0;
+	width: auto;
+}
+
+#slide-1 #football-tricolore {
+	top: 50%;
+	left: 100%;
+	width: 30%;
+	transition: left 1s ease;
+}
+
+#slide-1 #guitar-spanish {
+	left: 50%;
+	width: 50%;
+}
+
+#slide-1 #comics {
+	top: 50%;
+	left: 70%;
+	width: 30%;
+}
+
+#slide-1 #overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: white;
+	transition: top 25s linear;
 }

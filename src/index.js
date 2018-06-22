@@ -196,18 +196,6 @@ let STATES = [{
 	slide: 1
 }, {
 	enter: () => {
-		document.querySelector('#slide-1 #football-tricolore').style.display = 'block'
-	}
-}, {
-	enter: () => {
-		document.querySelector('#slide-1 #guitar-spanish').style.display = 'block'
-	}
-}, {
-	enter: () => {
-		document.querySelector('#slide-1 #comics').style.display = 'block'
-	}
-}, {
-	enter: () => {
 		document.querySelectorAll('#slide-1 *').forEach((e) => {
 			e.style.display = 'none'
 		})
@@ -220,6 +208,23 @@ let STATES = [{
 }, {
 	enter: () => {
 		document.querySelector('#slide-1 #mac-error').play()
+	}
+}, {
+	enter: () => {
+		let ball = document.querySelector('#slide-1 #football-tricolore')
+		ball.style.display = 'block'
+		setTimeout(() => {
+			ball.style.left = '50%'
+		}, 1000)
+	}
+}, {
+	enter: () => {
+		document.querySelector('#slide-1 #football-tricolore').style.left = '100%'
+		document.querySelector('#slide-1 #guitar-spanish').style.display = 'block'
+	}
+}, {
+	enter: () => {
+		document.querySelector('#slide-1 #comics').style.display = 'block'
 	}
 }, {
 	enter: () => {
@@ -243,19 +248,29 @@ let STATES = [{
 		})
 		document.querySelector('#slide-1 #yahoo-1997').style.display = 'block'
 		document.querySelector('#slide-1 #internet-dial-up').play()
+		let overlay = document.querySelector('#slide-1 #overlay')
+		overlay.style.display = 'block'
+		setTimeout(() => {
+			overlay.style.top = '100%'
+		}, 1000)
 	}
 }, {
+	enter: () => {
+		document.querySelector('#slide-1 #overlay').style.top = '100%'
+	},
 	flyTo: BURGDORF.flyTo,
 	features: [BURGDORF.feature],
 	filter: 'sepia(50%) contrast(103%) saturate(70%) blur(1.4px)'
 }, {
 	slide: 2
 }, {
+	slide: 3
+}, {
 	flyTo: BERN.flyTo,
 	features: [BERN.feature],
 	filter: 'sepia(20%) contrast(101%) saturate(90%) blur(1.1px)'
 }, {
-	slide: 3
+	slide: 4
 }, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(4373502.432575947, 576401.6483197737, 4634934.781734697),
@@ -271,7 +286,7 @@ let STATES = [{
 	],
 	filter: 'sepia(10%) saturate(95%)'
 }, {
-	slide: 4
+	slide: 5
 }, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(6673109.653503922, 777835.7824100128, 5352723.393619237),
@@ -300,13 +315,13 @@ let STATES = [{
 	],
 	filter: ''
 }, {
-	slide: 5
+	slide: 6
 }, {
 	flyTo: SOLOTHURN.flyTo,
 	features: [SOLOTHURN.feature],
 	filter: ''
 }, {
-	slide: 6
+	slide: 7
 }]
 let next = () => {
 	goTo((i + 1 + STATES.length) % STATES.length)
@@ -317,14 +332,14 @@ let previous = () => {
 let goTo = (j) => {
 	i = j
 	let state = STATES[i]
-	if (state.enter != undefined) {
-		state.enter()
-	} else {
+	if (state.flyTo != undefined || state.slide != undefined) {
 		document.querySelectorAll('#slides .current').forEach((e) => {
 			e.classList.remove('current')
 		})
 	}
-	labelSource.clear()
+	if (state.enter != undefined) {
+		state.enter()
+	}
 	if (state.slide != undefined) {
 		document.querySelector(`#slides #slide-${state.slide}`).classList.add('current')
 	}
@@ -333,6 +348,7 @@ let goTo = (j) => {
 		scene.camera.flyTo(state.flyTo)
 	}
 	if (state.features != undefined) {
+		labelSource.clear()
 		labelSource.addFeatures(state.features)
 	}
 	if (state.filter != undefined) {
