@@ -234,11 +234,38 @@ let STATES = [{
 }, {
 	slide: 9
 }, {
+	slide: 10
+}, {
+	slide: 11
+}, {
+	slide: 12
+}, {
+	slide: 13
+}, {
+	slide: 14,
+	enter: () => {
+		document.querySelectorAll('#slide-14 *').forEach((e) => {
+			e.classList.remove('faded')
+		})
+	}
+}, {
+	enter: () => {
+		document.querySelector('#slide-14 :nth-child(1)').classList.add('faded')
+	}
+}, {
+	enter: () => {
+		document.querySelector('#slide-14 :nth-child(2)').classList.add('faded')
+	}
+}, {
+	enter: () => {
+		document.querySelector('#slide-14 :nth-child(3)').classList.add('faded')
+	}
+}, {
 	flyTo: BERN.flyTo,
 	features: [BERN.feature],
 	filter: 'sepia(20%) contrast(101%) saturate(90%) blur(1.1px)'
 }, {
-	slide: 10
+	slide: 15
 }, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(4373502.432575947, 576401.6483197737, 4634934.781734697),
@@ -254,7 +281,7 @@ let STATES = [{
 	],
 	filter: 'sepia(10%) saturate(95%)'
 }, {
-	slide: 11
+	slide: 16
 }, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(6673109.653503922, 777835.7824100128, 5352723.393619237),
@@ -283,13 +310,13 @@ let STATES = [{
 	],
 	filter: ''
 }, {
-	slide: 12
+	slide: 17
 }, {
 	flyTo: SOLOTHURN.flyTo,
 	features: [SOLOTHURN.feature],
 	filter: ''
 }, {
-	slide: 13
+	slide: 18
 }]
 let next = () => {
 	goTo((i + 1 + STATES.length) % STATES.length)
