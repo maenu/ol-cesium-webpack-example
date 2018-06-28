@@ -135,3 +135,45 @@ img.contain {
 	font-size: 10vh;
 	padding: 3vh;
 }
+
+#slide-16 * {
+	width: 100%;
+	padding: 2vh 5vh;
+	font-size: 10vh;
+}
+
+#slide-16 :nth-child(1) {
+	height: calc(100% * 90 / 180);
+	background: rgba(94, 156, 205, 1);
+}
+
+#slide-16 :nth-child(2) {
+	height: calc(100% * 30 / 180);
+	background: rgba(94, 156, 205, 0.5);
+}
+
+#slide-16 :nth-child(3) {
+	height: calc(100% * 30 / 180);
+	background: rgba(225, 216, 160, 1);
+}
+
+#slide-16 :nth-child(4) {
+	height: calc(100% * 30 / 180);
+	background: rgba(225, 216, 160, 0.5);
+}
+
+#slide-20 * {
+	padding: 2vh;
+}
+
+#slide-20 :nth-child(1) {
+	height: 30%;
+}
+
+#slide-20 :nth-child(2) {
+	height: 70%;
+}
+
+#slide-23 * {
+	object-position: 50% 12%;
+}

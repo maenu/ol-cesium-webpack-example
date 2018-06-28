@@ -267,6 +267,16 @@ let STATES = [{
 }, {
 	slide: 15
 }, {
+	slide: 16
+}, {
+	slide: 17
+}, {
+	slide: 18
+}, {
+	slide: 19
+}, {
+	slide: 20
+}, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(4373502.432575947, 576401.6483197737, 4634934.781734697),
 		orientation: {
@@ -281,7 +291,11 @@ let STATES = [{
 	],
 	filter: 'sepia(10%) saturate(95%)'
 }, {
-	slide: 16
+	slide: 21
+}, {
+	slide: 22
+}, {
+	slide: 23
 }, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(6673109.653503922, 777835.7824100128, 5352723.393619237),
@@ -310,13 +324,13 @@ let STATES = [{
 	],
 	filter: ''
 }, {
-	slide: 17
+	slide: 24
+}, {
+	slide: 25
 }, {
 	flyTo: SOLOTHURN.flyTo,
 	features: [SOLOTHURN.feature],
 	filter: ''
-}, {
-	slide: 18
 }]
 let next = () => {
 	goTo((i + 1 + STATES.length) % STATES.length)
