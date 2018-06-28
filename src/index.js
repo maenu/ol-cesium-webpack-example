@@ -196,81 +196,49 @@ let STATES = [{
 	slide: 1
 }, {
 	enter: () => {
-		document.querySelectorAll('#slide-1 *').forEach((e) => {
-			e.style.display = 'none'
-		})
-		document.querySelector('#slide-1 #mac-se30').style.display = 'block'
+		document.querySelector('#mac-startup').play()
 	}
 }, {
 	enter: () => {
-		document.querySelector('#slide-1 #mac-startup').play()
+		document.querySelector('#mac-error').play()
 	}
-}, {
-	enter: () => {
-		document.querySelector('#slide-1 #mac-error').play()
-	}
-}, {
-	enter: () => {
-		let ball = document.querySelector('#slide-1 #football-tricolore')
-		ball.style.display = 'block'
-		setTimeout(() => {
-			ball.style.left = '50%'
-		}, 1000)
-	}
-}, {
-	enter: () => {
-		document.querySelector('#slide-1 #football-tricolore').style.left = '100%'
-		document.querySelector('#slide-1 #guitar-spanish').style.display = 'block'
-	}
-}, {
-	enter: () => {
-		document.querySelector('#slide-1 #comics').style.display = 'block'
-	}
-}, {
-	enter: () => {
-		document.querySelectorAll('#slide-1 *').forEach((e) => {
-			e.style.display = 'none'
-		})
-		document.querySelector('#slide-1 #win95-screen').style.display = 'block'
-		document.querySelector('#slide-1 #win95-startup').play()
-	}
-}, {
-	enter: () => {
-		document.querySelectorAll('#slide-1 *').forEach((e) => {
-			e.style.display = 'none'
-		})
-		document.querySelector('#slide-1 #win95-bsod').style.display = 'block'
-	}
-}, {
-	enter: () => {
-		document.querySelectorAll('#slide-1 *').forEach((e) => {
-			e.style.display = 'none'
-		})
-		document.querySelector('#slide-1 #yahoo-1997').style.display = 'block'
-		document.querySelector('#slide-1 #internet-dial-up').play()
-		let overlay = document.querySelector('#slide-1 #overlay')
-		overlay.style.display = 'block'
-		setTimeout(() => {
-			overlay.style.top = '100%'
-		}, 1000)
-	}
-}, {
-	enter: () => {
-		document.querySelector('#slide-1 #overlay').style.top = '100%'
-	},
-	flyTo: BURGDORF.flyTo,
-	features: [BURGDORF.feature],
-	filter: 'sepia(50%) contrast(103%) saturate(70%) blur(1.4px)'
 }, {
 	slide: 2
 }, {
 	slide: 3
 }, {
+	slide: 4
+}, {
+	slide: 5,
+	enter: () => {
+		document.querySelector('#win95-startup').play()
+	}
+}, {
+	slide: 6
+}, {
+	slide: 7,
+	enter: () => {
+		document.querySelector('#internet-dial-up').play()
+		let overlay = document.querySelector('#overlay')
+		overlay.setAttribute('style', '')
+		setTimeout(() => {
+			overlay.style.top = '100%'
+		}, 100)
+	}
+}, {
+	flyTo: BURGDORF.flyTo,
+	features: [BURGDORF.feature],
+	filter: 'sepia(50%) contrast(103%) saturate(70%) blur(1.4px)'
+}, {
+	slide: 8
+}, {
+	slide: 9
+}, {
 	flyTo: BERN.flyTo,
 	features: [BERN.feature],
 	filter: 'sepia(20%) contrast(101%) saturate(90%) blur(1.1px)'
 }, {
-	slide: 4
+	slide: 10
 }, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(4373502.432575947, 576401.6483197737, 4634934.781734697),
@@ -286,7 +254,7 @@ let STATES = [{
 	],
 	filter: 'sepia(10%) saturate(95%)'
 }, {
-	slide: 5
+	slide: 11
 }, {
 	flyTo: {
 		destination: new Cesium.Cartesian3(6673109.653503922, 777835.7824100128, 5352723.393619237),
@@ -315,13 +283,13 @@ let STATES = [{
 	],
 	filter: ''
 }, {
-	slide: 6
+	slide: 12
 }, {
 	flyTo: SOLOTHURN.flyTo,
 	features: [SOLOTHURN.feature],
 	filter: ''
 }, {
-	slide: 7
+	slide: 13
 }]
 let next = () => {
 	goTo((i + 1 + STATES.length) % STATES.length)
