@@ -12,15 +12,15 @@ html, body, #map, #slides, .slide {
 
 h1 {
 	font-size: 20vh;
-	margin: 2vh;
+	margin: 4vh;
 }
 h2 {
 	font-size: 12vh;
-	margin: 1.5vh;
+	margin: 2.4vh;
 }
 h3 {
 	font-size: 8vh;
-	margin: 1vh;
+	margin: 1.6vh;
 }
 
 .faded {
@@ -63,6 +63,7 @@ img.contain {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	text-align: center;
 }
 
 .slide.current {
@@ -78,7 +79,13 @@ img.contain {
 	background: black;
 }
 
-#slide-0 {
+#slide-0 h1 {
+	font-size: 15vh;
+	font-style: italic;
+	font-family: serif;
+}
+
+#slide-1 {
 	font-family: "BarloesiusSchrift";
 }
 
@@ -94,7 +101,7 @@ img.contain {
 }
 
 #comics {
-	padding: 10%;
+	padding-top: 20%;
 }
 
 #football-tricolore {
@@ -131,49 +138,64 @@ img.contain {
 	height: 100%;
 }
 
-#slide-14 * {
+#slide-15 * {
 	font-size: 10vh;
 	padding: 3vh;
 }
 
-#slide-16 * {
+#slide-17 * {
 	width: 100%;
 	padding: 2vh 5vh;
 	font-size: 10vh;
 }
 
-#slide-16 :nth-child(1) {
+#slide-17 :nth-child(1) {
 	height: calc(100% * 90 / 180);
 	background: rgba(94, 156, 205, 1);
 }
 
-#slide-16 :nth-child(2) {
+#slide-17 :nth-child(2) {
 	height: calc(100% * 30 / 180);
 	background: rgba(94, 156, 205, 0.5);
 }
 
-#slide-16 :nth-child(3) {
+#slide-17 :nth-child(3) {
 	height: calc(100% * 30 / 180);
 	background: rgba(225, 216, 160, 1);
 }
 
-#slide-16 :nth-child(4) {
+#slide-17 :nth-child(4) {
 	height: calc(100% * 30 / 180);
 	background: rgba(225, 216, 160, 0.5);
 }
 
-#slide-20 * {
+#slide-21 * {
 	padding: 2vh;
 }
 
-#slide-20 :nth-child(1) {
+#slide-21 :nth-child(1) {
 	height: 30%;
 }
 
-#slide-20 :nth-child(2) {
+#slide-21 :nth-child(2) {
 	height: 70%;
 }
 
-#slide-23 * {
+#slide-24 * {
 	object-position: 50% 12%;
+}
+
+#slide-26 ol {
+	position: absolute;
+	right: 5vw;
+	bottom: 5vh;
+	padding: 1em;
+	list-style: none;
+	text-align: left;
+	font-size: 5vh;
+	background: rgba(255, 255, 255, 0.67);
+}
+
+#slide-26 a {
+	color: black;
 }
